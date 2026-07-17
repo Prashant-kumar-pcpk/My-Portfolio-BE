@@ -1,26 +1,16 @@
 require("dotenv").config();
-const mssql = require("mssql");
+const mongoose = require("mongoose");
 
-const dbConfig = {
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  server: process.env.DB_SERVER,
-  database: process.env.DB_NAME,
-  options: {
-    encrypt: false,
-    trustServerCertificate: true,
-  },
-  port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 1433,
-};
+const mongoUri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/portfolio";
 
-let pool;
-
-async function getPool() {
-  if (!pool) {
-    pool = await mssql.connect(dbConfig);
-    console.log("✅ MSSQL Connected");
+async function connectDB() {
+  try {
+    await mongoose.connect(mongoUri);
+    console.log("MongoDB Connected");
+  } catch (error) {
+    console.error("MongoDB connection failed:", error.message);
+    process.exit(1);
   }
-  return pool;
 }
 
-module.exports = { getPool, mssql };
+module.exports = connectDB;

@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const connectDB = require("./config/db");
 
 const contactRoutes = require("./routes/contact.routes");
 const mailRoutes = require("./routes/mail.routes");
@@ -21,7 +22,10 @@ app.use("/contact", contactRoutes);
 app.use("/sendmail", mailRoutes);
 
 
-const PORT = 8088; // or 4000, 8080 etc.
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+const PORT = process.env.PORT || 8088; // or 4000, 8080 etc.
+
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
 });
