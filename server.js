@@ -22,7 +22,7 @@ app.use("/contact", contactRoutes);
 app.use("/sendmail", mailRoutes);
 
 
-const PORT = process.env.PORT || 8088; // or 4000, 8080 etc.
+const PORT = process.env.PORT || 8088; //  8080 etc.
 
 connectDB().then(() => {
   app.listen(PORT, () => {
