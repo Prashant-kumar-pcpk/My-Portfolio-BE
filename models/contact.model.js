@@ -6,7 +6,7 @@ const contactSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      maxlength: 200,
+      maxlength: 50,
     },
     email: {
       type: String,
@@ -19,7 +19,7 @@ const contactSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      maxlength: 50,
+      maxlength: 20,
     },
   },
   {

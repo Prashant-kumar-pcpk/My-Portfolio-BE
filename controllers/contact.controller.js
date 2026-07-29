@@ -1,5 +1,8 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const Contact = require("../models/contact.model");
 const { sendSMS } = require("../services/twilio.service");
+
 
 async function createContact(req, res) {
   const { name, email, phone } = req.body;
